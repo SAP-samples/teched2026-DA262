@@ -143,7 +143,11 @@ Once the notebook file is opened,
 <br>![](/exercises/ex0/images/26_ex0s3-8_overview.png)
 
 
-
+### Manage workspace trust
+<br>![](/exercises/ex0/images/26_ex0_workspacetrust_1.png)
+<br>![](/exercises/ex0/images/26_ex0_workspacetrust_2.png)
+<br>![](/exercises/ex0/images/26_ex0_workspacetrust_3.png)
+<br>![](/exercises/ex0/images/26_ex0_workspacetrust_4.png)
 
 ## Summary
 

@@ -41,17 +41,34 @@ The model was trained on **1.9 million** past orders. The exercise tests it on *
 
 <br><br>
 
-## Exercise 3.1 Explore the sales order data
+## Start the exercise
+- open the notebook file ex1_notebook.ipynb from the project explorer
+<br>![](/exercises/ex3/images/26ex30-1_open_nbk.png)
+<br>![](/exercises/ex3/images/26ex30-2_select_kernel.png)
+<br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
+- to pursue the exercise, execute the cells step by step
+<br>![](/exercises/ex1/images/26ex10-4_exec_cells.png)
 
-### Step 1 — Open the Notebook and connect to SAP HANA Cloud
+Open the Notebook and connect to SAP HANA Cloud
 Open the file **`ex03_student.ipynb`** in Jupyter and run the cells from top to bottom.
 
 > **No setup needed.** The `hana_ml` library is already installed. The model is already trained and stored in SAP HANA Cloud. You only need to open the notebook and run the cells.
 
 
+
+
+## Ex. 3.0 - Connect to your SAP HANA Cloud instance
+<br>![](/exercises/ex3/images/26ex30-outline.png)
+<br>![](/exercises/ex3/images/26ex30-5_connect.png)
+
 The first step opens a connection to SAP HANA Cloud using a saved **userkey** — a shortcut stored on this machine that holds your database address and login details. No passwords appear in the notebook.
 
 After this cell runs you will see `Connected: True` — this means the connection is open and you are ready to work.
+
+
+## Ex. 3.1 - Access and Explore the sales order data
+
+### Step 1 — 
 
 ---
 
@@ -74,7 +91,7 @@ You will:
 - **Run a statistical summary** — check for nulls, min and max values, and data quality
 <br><br>
 
-## Exercise 3.2 Train a "multi-target" classification model for sales order form autocompletion
+## Ex. 3.2 - Train a "multi-target" classification model for sales order form autocompletion
 
 Training a model from scratch on 1.9 million rows takes about **2.5 hours**. You do not need to wait — the model has already been trained and its learned weights are saved permanently inside SAP HANA Cloud as a regular table.
 
@@ -97,7 +114,7 @@ The output shows `Model table rows: 14,864` — these are the saved neural netwo
 
 <br><br>
 
-## Exercise 3.3 Predict missing fields to autocomplete new sales orders
+## Ex. 3.3 - Predict missing fields to autocomplete new sales orders
 Now the model is put to work on real orders.
 
 4 orders are taken from the test set and the 8 target fields are hidden by replacing them with a special marker called `PAL_MLP_MASK` — this tells the model: *"this field is blank — please predict it."*
@@ -107,7 +124,7 @@ The model looks at the 19 known input fields (product, customer, country, etc.) 
 The result table shows each order, each field, the true value, the predicted value, and whether they match.
 <br><br>
 
-## Exercise 3.4 Measure prediction accuracy
+## Ex 3.4 - Measure prediction accuracy
 4 orders gave a first impression. This step tests the model on all **1,000 orders** to get reliable accuracy numbers.
 
 The model does not just give one answer — it gives its **top 3 guesses** ranked by confidence. Three metrics are reported:
@@ -128,7 +145,8 @@ The model does not just give one answer — it gives its **top 3 guesses** ranke
 You will also see **confidence scores** — the model tells you how sure it is about each prediction. When confidence is high, the field can be auto-filled. When it is low, the application can ask the user to confirm.
 <br><br>
 
-## Exercise 3.5 Improve prediction latency with stateful models (optional)
+## Appendix - Option
+### Improve prediction latency with stateful models (optional)
 
 The model is accurate. Now the goal is to make it **production-ready**.
 

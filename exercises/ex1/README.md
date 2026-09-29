@@ -14,14 +14,30 @@ In this exercise, you will explore how to apply SAP-RPT-TS to generate bike sale
 
 <br>
 
+## Start the exercise
+- open the notebook file ex1_notebook.ipynb from the project explorer
+<br>![](/exercises/ex1/images/26ex10-1_open_nbk.png)
+<br>![](/exercises/ex1/images/26ex10-2_select_kernel.png)
+<br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
+- to pursue the exercise, execute the cells step by step
+<br>![](/exercises/ex1/images/26ex10-4_exec_cells.png)
+
+## Ex. 1.0 - Connect to your SAP HANA Cloud instance
+<br>![](/exercises/ex1/images/26ex10-outline.png)
+<br>![](/exercises/ex1/images/26ex10-5_connect.png)
+
 ## Exercise 1.1 Explore the Bike Sharing time series data
 
 After completing these steps you will have created...
+<br>![](/exercises/ex1/images/26ex11-outline.png)
 
-1. Click here.
+1. blabla.
+<br>![](/exercises/ex1/images/26ex11-s1-1-hdf.png)
+
+<br>![](/exercises/ex1/images/26ex11-s2-1-explore.png)
 <br>![](/exercises/ex1/images/26ex11-1_ts_data.png)
 
-2.	Insert this line of code.
+2.	blabla.
 ```python
 hdf_data_plot = data_hdf.select('Sales', 'Date', 'Store').sort('Date') #,\'64\',\'25\'
 import plotly.express as px
@@ -36,8 +52,10 @@ fig.show()
 ## Exercise 1.2 Forecast with "SAP-RPT-TS"
 
 After completing these steps you will have...
+<br>![](/exercises/ex1/images/26ex12-outline.png)
 
-1.	Enter this code.
+
+1.	blabla, just exampl.
 ```python
 from hana_ml.algorithms.pal.pipeline import Pipeline
 #pipe = Pipeline(pipeline={"TSFM": {"args": {}, "inputs": {"data": "ROWDATA"}}})
@@ -53,8 +71,9 @@ result = pipe.predict(data_hdf.filter('"Store" in (\'84\')').select('DATE', 'Sal
 ## Exercise 1.3 Forecast multiple time series with "SAP-RPT-TS"
 
 After completing these steps you will have...
+<br>![](/exercises/ex1/images/26ex13-outline.png)
 
-1.	Enter this code.
+1.	blabla, just example.
 ```python
 from hana_ml.algorithms.pal.massive_pipeline import MassivePipeline
 mpipe = MassivePipeline(pipeline={"TSFM": {"args": {"BATCH_SIZE": [128], "OUTPUT_QUANTILE": 0, "POINT_FORECAST": ["median"], "CLIP_MIN": 0, "CLIP_MAX": 30000}, "inputs": {"data": "ROWDATA"}}})
@@ -66,16 +85,7 @@ result.collect()
 ```
 <br>![](/exercises/ex1/images/26ex13-1_forecast_result.png)
 
-## Exercise 1.4 Utilize "SAP-RPT-TS" with AutoML for time series (optional)
-- AutoML TimeSeries Fit¶
-- Predict with RPT-TS, using pipeline determined from AutoML-Fit
-- Explicit back-testing of the RPT-TS forecast
 
-## Exercise 1.5 Utilize PAL SQL functions for "SAP-RPT-TS" (optional)
-
-2.	Click here.
-```sql
-```
 
 ## Summary
 

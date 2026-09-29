@@ -10,6 +10,17 @@ In this exercise, you will explore how to apply SAP-RPT-TS to generate bike sale
 2. You will further learn how to create forecasts with and without covariate data, and how to forecast multiple time series at once using the massive, data-parallel methods
 <br>
 
+## Start the exercise
+- open DBX
+<br>![](/exercises/ex2/images/26_ex20-open_DBX.png)
+- verify connection, select connection from database list
+<br>![](/exercises/ex2/images/26_ex20-DBX_connection_catalog.png)
+
+- Select Open SAP HANA SQL Console
+-  Open a SQL editor
+<br>![](/exercises/ex0/images/26_ex0s2-4_open_SQLconsole.png)
+
+
 ## Exercise 2.1 Review the remote source for "SAP-RPT-1.6"
 
 After completing these steps you will have created...
