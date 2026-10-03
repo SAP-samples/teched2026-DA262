@@ -1,25 +1,26 @@
-# Exercise 3 - Build multi-target neural network prediction models for an order form autocompletion use cas
+# Exercise 3 - Build multi-target neural network prediction models for an order form autocompletion use case
 
-In this exercise, we will create...
+In this exercise, we will build a multi-target neural network machine learning model, using algorithms from the SAP HANA Cloud Predictive Analysis Library (PAL), so support a Sales Order form autocompletion use case, predicting 8 target field values at once. Providing the best 3 value proposals for each and measure the prediction accuracy.
 
 
 ## Exercise - Use case scenario overview
 
-In real SAP sales order processing, some fields are often left blank when an order is created — for example, which plant to ship from, what payment terms to use, or which shipping point to use. Filling these in correctly requires experience and takes time. If they are filled in wrong, it causes errors in downstream processes.
+In a large variety of business processes, forms (like an Sales Order form) require filling a large number of fields in the UI. In data reality, some fields are often left blank when an order is created — for example, the shipping point, payment terms, or plant. Filling these in correctly requires experience and takes time.
 
-In this exercise, you will use a **machine learning model** that has already been trained on **1.9 million historical sales orders** stored inside SAP HANA Cloud. The model has learned the patterns from those past orders and can automatically predict the blank fields for any new order — without moving data out of HANA.
+In this exercise, you will build a __neural network machine learning model__ using algorithms from the __Predictive Analysis Library (PAL)__ in SAP HANA Cloud, to predict values to autocomplete 8 fields in a Sales Order form. The __PAL multi-target MLP algorithm__ in its latest release (2026 Q3), it also __allows to handle columns (fields), which are sometimes already filled and sometimes have to predicted, thus have a dual role__. Again, in reality a common pattern too.
 
+*Example input screen of a Sales Order in SAP S/4HANA — the model shall predict the blank fields automatically.*
 ![SAP S/4HANA Sales Order App](images/SAP_S4HANA_SalesOrder_App.png)
 
-*Example input screen of a Sales Order in SAP S/4HANA — the model predicts the blank fields automatically.*
 
 ---
+<br>
 
-__The Sales Autocompletion Linked Business Tables (aka SALT)__
+__The Sales Autocompletion Linked Business Tables (aka SALT) dataset__
 
 The data used in this exercise comes from the **SALT** (Sales Autocompletion Linked Business Tables) dataset — a real enterprise dataset from an ERP system, designed to support machine learning research on tabular business data.
 
-- huggingface link
+- The [SAP/SALT · Datasets at Hugging Face](https://huggingface.co/datasets/SAP/SALT) are composed of a set of CDS_VIEWS
 
 ![SALT Dataset](images/SALT.png)
 
@@ -30,7 +31,6 @@ Each record in the dataset is a SAP sales order with **27 fields** split into tw
 | Always-known inputs | 19 | Sales org, product, sold-to party, billing country/region |
 | Fields to predict | 8 | Sales office, sales group, plant, payment terms, incoterms, shipping condition, shipping point |
 
-The model was trained on **1.9 million** past orders. The exercise tests it on **1,000 orders it has never seen before** — this is how we measure whether the model truly learned the patterns or just memorised the training data.
 
 **Dataset reference:**
 
@@ -42,107 +42,139 @@ The model was trained on **1.9 million** past orders. The exercise tests it on *
 <br><br>
 
 ## Start the exercise
-- open the notebook file ex1_notebook.ipynb from the project explorer
-<br>![](/exercises/ex3/images/26ex30-1_open_nbk.png)
+- Open the notebook file __ex03_notebook.ipynb__ from the project explorer
+<br>![](/exercises/ex3/images/26ex30-1_open_nbk.png) 
+<br>  
+
+- Select the Python Kernel
 <br>![](/exercises/ex3/images/26ex30-2_select_kernel.png)
+<br>  
+
+- Select the prepared __.venv-DA262__ Python Kernel
 <br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
-- to pursue the exercise, execute the cells step by step
+<br>  
+
+- Next, to pursue the exercise, execute the cells step by step, by clicking the __run cell-icon ">"__ as highlighted
 <br>![](/exercises/ex1/images/26ex10-4_exec_cells.png)
 
-Open the Notebook and connect to SAP HANA Cloud
-Open the file **`ex03_student.ipynb`** in Jupyter and run the cells from top to bottom.
+Proceed through the exercise sections and run the cells from top to bottom.
 
-> **No setup needed.** The `hana_ml` library is already installed. The model is already trained and stored in SAP HANA Cloud. You only need to open the notebook and run the cells.
+<br> <br> 
 
-
+The following exercise descriptions, just give a high-level exercise overview, all the instructions and explanations are part of the notebook file __ex03_notebook.ipynb__ itself.
 
 
 ## Ex. 3.0 - Connect to your SAP HANA Cloud instance
+- The outline-view on the lower left in Visual Studio code, overviews the exercise sections and steps 
 <br>![](/exercises/ex3/images/26ex30-outline.png)
-<br>![](/exercises/ex3/images/26ex30-5_connect.png)
 
-The first step opens a connection to SAP HANA Cloud using a saved **userkey** — a shortcut stored on this machine that holds your database address and login details. No passwords appear in the notebook.
 
-After this cell runs you will see `Connected: True` — this means the connection is open and you are ready to work.
 
+- In __Step 0__ you first create the connection to SAP HANA Cloud, and shows successful message like
+<br>![](/exercises/ex3/images/26ex30-3connect.png)
 
 ## Ex. 3.1 - Access and Explore the sales order data
+- Steps in this exercise section 
+<br>![](/exercises/ex3/images/26ex31-outline.png)
 
-### Step 1 — 
+- In __Step 1__ you will create a HANA dataframe against the preloaded tables
+<br>![](/exercises/ex3/images/26ex31-1_dataframe.png)
 
----
+    This step creates **HANA DataFrames**, which are SQL select statement pointers to tables that already live inside SAP HANA Cloud. 
 
-### Step 2 — Create the HANA dataframes and explore the Sales Order Data
+    You will work with:
+    - **Training set** — 1.9 million past orders, used to train the model
+    - **Test set** — 1,000 orders the model has never seen, used to measure accuracy
 
-This step creates **HANA DataFrames** — lightweight pointers to tables that already live inside SAP HANA Cloud. No data is downloaded to Python at this point. The data stays in the database.
+<br>
 
-You will work with:
-- **Training set** — 1.9 million past orders, used to train the model
-- **Test set** — 1,000 orders the model has never seen, used to measure accuracy
-
-The output shows `shape: [1000, 28]` — 1,000 orders and 28 columns.
+- In Step 2 you will use different HANA dataframe methods to overview and explore the Sales Order data, like the target column value distribution
+<br>![](/exercises/ex3/images/26ex31-2_explore.png)
 
 
-Before using the model it is good practice to understand the data first.
-
-You will:
-- **Preview a few rows** — see what a real sales order looks like
-- **Count unique values per field** — fields with more unique values are harder to predict. For example, SALESOFFICE has only 4 possible values (easy), while SALESGROUP has 260 possible values (harder). You will see this difference clearly in the accuracy results.
-- **Run a statistical summary** — check for nulls, min and max values, and data quality
+    In more detail you will:
+    - **Preview a few rows** — see what a real sales order looks like
+    - **Count unique values per field** — fields with more unique values are harder to predict. For example, SALESOFFICE has only 4 possible values (easy), while SALESGROUP has 260 possible values (harder). You will see this difference clearly in the accuracy results.
+    - **Run a statistical summary** — check for nulls, min and max values, and data quality
 <br><br>
 
 ## Ex. 3.2 - Train a "multi-target" classification model for sales order form autocompletion
+- Steps in this exercise section 
+<br>![](/exercises/ex3/images/26ex32-outline.png)
+<br>
 
-Training a model from scratch on 1.9 million rows takes about **2.5 hours**. You do not need to wait — the model has already been trained and its learned weights are saved permanently inside SAP HANA Cloud as a regular table.
+- In __Step 3__ you access the pre-trained MT_MLP model and explore statistics from its training task
+  - The model is a **Multi-Task MLP** (Multi-Layer Perceptron — a type of neural network). "Multi-Task" means it predicts all 8 missing fields at the same time in a single pass, rather than running 8 separate models. This makes it faster and lets the fields help each other during prediction.
+  - The SALT training data set has ~1.9 million rows, training a model from scratch might takes more than an hour, therefore we re-use a pre-trained model based on 1.9 million rows and finetune that in the next steps
+  
+<br>
 
-This step simply points to that saved model. No training happens here.
+- In __Step 4__ you will create a HANA dataframe for the fintuning data and overview the MT_MLP Neural Network parameters used to train the model
+<br>
 
-The model is a **Multi-Task MLP** (Multi-Layer Perceptron — a type of neural network). "Multi-Task" means it predicts all 8 missing fields at the same time in a single pass, rather than running 8 separate models. This makes it faster and lets the fields help each other during prediction.
-
-The output shows `Model table rows: 14,864` — these are the saved neural network weights stored as rows in HANA.
-
-| What | Detail |
-|---|---|
-| Model type | Multi-Task MLP (neural network) |
-| Training rows | 1,900,000 |
-| Input columns | 19 always-known fields |
-| Fields predicted | 8 (all at the same time) |
-| Training time | ~2.5 hours |
-| Stored in | `SOAC_MODEL_FULL_27COL_TBL` — a column table in SAP HANA Cloud |
-
----
-
+- In __Step 5__ you will define and execute the model finetuning-fit task and create an even better prediction data based on the new Sales Order data
+<br>![](/exercises/ex3/images/26ex32-1_fit.png)
+<br>![](/exercises/ex3/images/26ex32-2_fitout.png)
 <br><br>
 
 ## Ex. 3.3 - Predict missing fields to autocomplete new sales orders
-Now the model is put to work on real orders.
+- Steps in this exercise section 
+<br>![](/exercises/ex3/images/26ex33-outline.png)
+<br>
 
-4 orders are taken from the test set and the 8 target fields are hidden by replacing them with a special marker called `PAL_MLP_MASK` — this tells the model: *"this field is blank — please predict it."*
+- In __Step 6__ we will apply the model for prediction to new Sales Orders (actually data rows from our test data)
+  - We will sample 4 orders from the test set
+  - A "speciality" of the algorithm is, it can handle column in dual role, as features as well as target columns, depending on what is present in each row individually. However, for the model to detect if a rows value a column should be treated as target, the empty / missing value needs be replaced with a special marker value  `PAL_MLP_MASK` (or `999` for integer columns).
+  - See the replacement excample for the column SALESOFFICE
+  <br>![](/exercises/ex3/images/26ex33-1_mas.png)
+  <br>
 
-The model looks at the 19 known input fields (product, customer, country, etc.) and predicts all 8 blank fields at once. Because we already know the true values for these 4 orders, we can immediately check whether the predictions are correct.
+  - the __predict__-call applies the model and we can compare predicted against some actual values for an accuracy impression
+    <br>![](/exercises/ex3/images/26ex33-2_predict.png)
 
-The result table shows each order, each field, the true value, the predicted value, and whether they match.
+    The model looks at the 19 known input fields (product, customer, country, etc.) and predicts all 8 blank fields at once. Because we already know the true values for these 4 orders, we can immediately check whether the predictions are correct.
+
+    The result table shows each order, each field, the true value, the predicted value, and whether they match.
 <br><br>
 
 ## Ex 3.4 - Measure prediction accuracy
-4 orders gave a first impression. This step tests the model on all **1,000 orders** to get reliable accuracy numbers.
+- Steps in this exercise section 
+<br>![](/exercises/ex3/images/26ex34-outline.png)
+<br>
 
-The model does not just give one answer — it gives its **top 3 guesses** ranked by confidence. Three metrics are reported:
+- In __Step 7__ we want to measure the models prediction accuracy over **1,000 orders** from the test data set to get more reliable accuracy numbers.
 
-| Metric | What it means |
-|---|---|
-| **Top-1** | The model's first guess is exactly correct |
-| **Top-3** | The correct answer appears somewhere in the top 3 guesses |
-| **MRR** | Mean Reciprocal Rank — how highly the correct answer is ranked on average (1.000 = always rank 1, perfect) |
+    The model does not just give one answer — it can give us an prediction confidence for all possible prediction values of a target column. Here we want the **top 3 predicted values** ranked by confidence for each target.
+  - As and example, we measure the accuracy using three metrics for the SALESGROUP field:
+  <br>![](/exercises/ex3/images/26ex34-1_accuracy.png)
+    - **Top-1 = 90.7%** The model's first guess was correct for 907 out of 1,000 orders.
+    - **Top-3 = 99.1%** The correct answer appeared somewhere in the top 3 guesses for 991 out of 1,000 orders. The model got it wrong on first guess 93 times, but the right answer was still in the top 3 for 84 of those 93 times.
+    - **MRR = 0.949** MRR measures how highly the correct answer is ranked on average:
+        - If the correct answer is always rank 1 → MRR = 1.000 (perfect)
+        - If the correct answer is always rank 2 → MRR = 0.500
+        - If the correct answer is always rank 3 → MRR = 0.333
+        - MRR = 0.949 means the correct answer is almost always the model's first guess — very close to perfect.
 
-**Example results for SALESGROUP** (the hardest field with 260 possible values):
-- Top-1: **90.7%** — the model's first guess was correct for 907 out of 1,000 orders
-- Top-3: **99.1%** — the correct answer was in the top 3 guesses for 991 out of 1,000 orders
-- MRR: **0.949** — the correct answer is almost always the model's first guess
+    **Why Top-3 matters in practice:** In a real SAP applications, the user sees a dropdown with the top 3 suggestions and picks the right one. A Top-3 score of 99% means the correct answer is in the dropdown almost every time.  
 
-**Why Top-3 matters:** In a real SAP application, the user sees a dropdown with the top 3 suggestions and picks the right one. A Top-3 score of 99% means the correct answer is in the dropdown almost every time.
+    Within an application the prediction **confidence scores** might of crucial help to the end-user, when confidence is high to accept the auto-filled values, and when it is low, the application can ask the user to confirm.
 
-You will also see **confidence scores** — the model tells you how sure it is about each prediction. When confidence is high, the field can be auto-filled. When it is low, the application can ask the user to confirm.
+<br><br>
+
+
+## Summary
+
+In this exercise you used a machine learning model from the Predictive Analysis Library (PAL) to automatically predict 8 missing fields on SAP sales orders — executing entirely inside SAP HANA Cloud, without moving any data to Python.
+- **ML inside SAP HANA Cloud**  The model runs where the data lives — no export, no extra infrastructure 
+- **Pre-trained model** Training took 2.5 hours once; after that predictions take milliseconds (especially with stateful models)
+- **Multi-target model with dual-roal attributes** MT_MLP is a powerful neural network algorithm, allowing to use of overlapping attributes in complex order form autocompletion scenarios
+
+<br><br>
+---
+Continue to - [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
+
+<br><br>
+
 <br><br>
 
 ## Appendix - Option
@@ -164,17 +196,3 @@ This section proves two things with real numbers:
 | Stateful predict | ~60 ms per order | ~1,000 orders/min |
 
 <br><br>
-
-## Summary
-
-In this exercise you used a machine learning model to automatically predict 8 missing fields on SAP sales orders — entirely inside SAP HANA Cloud, without moving any data to Python.
-
-| Concept | What it means |
-|---|---|
-| **ML inside HANA** | The model runs where the data lives — no data export, no extra infrastructure |
-| **Pre-trained model** | Training took 2.5 hours once; after that predictions take milliseconds |
-| **Stateful predict** | Load the model into memory once, reuse it for every order — same accuracy, much faster |
-
-<br><br>
----
-Continue to - [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
