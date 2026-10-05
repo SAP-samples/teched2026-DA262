@@ -160,46 +160,46 @@ For our convenience, we will prepare the database connection credentials within 
 
 - On the top right, click select **Select Kernel**
 <br>![](/exercises/ex0/images/26_ex0s3-4_selectkernel.png)
-![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
-
-
-
-
-
-- run cells
-![](/exercises/ex0/images/26_ex0s3-6_run_cells.png)
-
--check
-![](/exercises/ex0/images/26_ex0s3-7_check_result1.png)
-![](/exercises/ex0/images/26_ex0s3-7_check_result2.png)
-![](/exercises/ex0/images/26_ex0s3-7_check_result3.png)
-
-### Furthermore, throughout the exercise, 
-- you will be asked to __review__ and __adjust/edit__ the python code within the notebook code-cells
-    ![](/exercises/ex0/images/26_ex0s3-9_nbk_edit.png)  
-
-and then execute the notebook cells
-- you should start executing each cell individually using the Play-icon to the left of the cell, , 
-    ![](/exercises/ex0/images/26_ex0s3-6_run_cells.png)
-- at a later point, you may execute all cells following the current one, using the Play-icon with the Top-Down-arrow in the right upper corner of the cell.
+- Select the prepared __.venv-DA262__ Python Kernel
+<br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
 
 <br>
 
-### Keep the overview
-Once the notebook file is opened,
-- you can open the __Outline-View__ by clicking __Outline__ in the header of the notebook, 
-- the notebook __Outline-View__ then opens to the left, and is helpful for oversight and navigation through the content of the notebook-file 
+- In order to **execute** the **Python Code-cells** step by step, best **click** the __run cell-icon ">"__ as highlighted **left** to the cell
+![](/exercises/ex0/images/26_ex0s3-6_run_cells.png)
+
+<br>
+
+- Now, execute the **Python Code-cells** in the opened notebook __ex0 - check Python setup and SAP HANA Cloud connection.ipynb__, and validate that
+  - **hana_ml** package is successfully loaded
+![](/exercises/ex0/images/26_ex0s3-7_check_result1.png)
+  - **user.ini-file** has been successfully processed
+![](/exercises/ex0/images/26_ex0s3-7_check_result2.png)
+   - **SAP HANA Cloud connection** has been successfully established
+![](/exercises/ex0/images/26_ex0s3-7_check_result3.png)
+
+
+<br>
+
+__Keep the OVERVIEW__ in the Python Notebook
+- Once a notebook file is opened,
+- you can open the __Outline-View__ by clicking ![](/exercises/ex0/images/26_ex0s3-8_overview2.png) in the header of the notebook, 
+- the notebook __Outline-View__ then opens to the left, and is helpful for **oversight** and **navigation** through the content of the notebook-file 
 - You can arrange the size of outline-view to your needs.
 <br>![](/exercises/ex0/images/26_ex0s3-8_overview.png)
 
 
-### Manage workspace trust
-<br>![](/exercises/ex0/images/26_ex0_workspacetrust_1.png)
-<br>![](/exercises/ex0/images/26_ex0_workspacetrust_2.png)
-<br>![](/exercises/ex0/images/26_ex0_workspacetrust_3.png)
+### Troubleshoot Workspace Trust
+- If it happens, that you see **Manage workspace trust** or **Restricted Mode** messages and popups
+  - "Restricted Mode messages"
+![](/exercises/ex0/images/26_ex0_workspacetrust_1.png)
+  - you can manage to set workspace trust to the **DA262 Workspace**-folders as following, click **Restricted Mode** at the lower left
+![](/exercises/ex0/images/26_ex0_workspacetrust_2.png)
+  - Click **Trust**
+![](/exercises/ex0/images/26_ex0_workspacetrust_3.png)
+  - Review Folder and **Close** on the top-right **X**
 <br>![](/exercises/ex0/images/26_ex0_workspacetrust_4.png)
 
 ## Summary
 
-Now that you have ...  
-Continue to - [Exercise 1 - Generate time series forecasts on-the-fly using using SAP-RPT-TS from SAP HANA Cloud](../ex1/README.md)
+Now that you have successfully prepared all the setup steps, continue to - [Exercise 1 - Generate time series forecasts on-the-fly using using SAP-RPT-TS from SAP HANA Cloud](../ex1/README.md)
