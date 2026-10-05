@@ -81,7 +81,7 @@ The following exercise descriptions, just give a high-level exercise overview, a
 - In __Step 0__ you first create the connection to SAP HANA Cloud, and shows successful message like
 <br>![](/exercises/ex1/images/26ex10-5_connect.png)
 
-## Exercise 1.1 Explore the Bike Sharing time series data
+## Ex 1.1 - Explore the Bike Sharing time series data
 - Steps in this exercise section 
 <br>![](/exercises/ex1/images/26ex11-outline.png)
 
@@ -99,7 +99,7 @@ The following exercise descriptions, just give a high-level exercise overview, a
 
 <br><br>
 
-## Exercise 1.2 Forecast with "SAP-RPT-TS"
+## Ex 1.2 - Forecast with "SAP-RPT-TS"
 - Steps in this exercise section 
 <br>![](/exercises/ex1/images/26ex12-outline.png)
 
@@ -145,7 +145,7 @@ result = pipe.predict(bike_hist_hdf.select('DATE_HOUR', 'CNT'),
 
 <br><br>
 
-## Exercise 1.3 Forecast multiple time series with "SAP-RPT-TS"
+## Ex. 1.3 - Forecast multiple time series with "SAP-RPT-TS"
 - Steps in this exercise section 
 <br>![](/exercises/ex1/images/26ex13-outline.png)
 

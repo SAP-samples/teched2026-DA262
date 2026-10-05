@@ -16,105 +16,155 @@ The technical requirements to complete the exercises in this repository, includi
 The remaining  _setup and configuration tasks_ are outlined in the [Getting Started - prepare your local VS Code environment](exercises/ex0/) section below.
 
 ## Step 1 - Prepare VS Code
-- Download [DA262 Student Workspace.zip](https://github.com/SAP-samples/teched2026-DA262/blob/main/exercises/ex0/setup/DA262%20Student%20Workspace.zip)
+- Download [DA262 Student Workspace.zip](https://github.com/SAP-samples/teched2026-DA262/blob/main/exercises/ex0/setup/DA262%20Student%20Workspace.zip)  
+  Path to direct download of the Workspace file is: https://github.com/SAP-samples/teched2026-DA262/blob/main/exercises/ex0/setup/DA262%20Student%20Workspace.zip
 <br>![](/exercises/ex0/images/26_ex0-1_download_workspace.png)
-- Copy from Downloads to Documents in Windows Explorer
-- From the context menue, select __Extract all__ 
+
+<br>
+
+- Copy the __DA262 Student Workspace.zip-file__ from the ![](/exercises/ex0/images/26_ex0-1_downloads_folder.png) folder in the Windows Explorer to the Windows ![](/exercises/ex0/images/26_ex0-1_documents_folder.png) folder
+
+<br>
+
+- From the context menue (right mouse button), select __Extract all__ 
 <br>![](/exercises/ex0/images/26_ex0-2_extract_workspace.png)
+
+<br>
+
 - Accept the default path __C:\Users\<user>\Documents\DA262 Student Workspace__ and confirm by clicking __extract__
+
+<br>
+
 - The extracted folder looks likes
 <br>![](/exercises/ex0/images/26_ex0-3_extracted_workspace.png)
-- open cmd
+
+<br>
+
+- Next, open windows default __cmd__-prompt AND select __Run as Administrator__ from the context menue (right mouse button)
 <br>![](/exercises/ex0/images/26_ex0-4_open_cmd.png)
-- Confirm *to allow to make changes* with __Yes__
-- Now 
-sql
-mklink /d "%USERPROFILE%\Documents\DA262 Student Workspace\.venv-DA262\Lib" "C:\Software\DA262\.venv-DA262\Lib"
-'''
+
+<br>
+
+- Confirm `*to allow to make changes*` with __Yes__
+
+<br>
+
+- Now COPY the following command and PASTE it into the cmd-prompt. 
+```cmd
+mklink /d "%USERPROFILE%/Documents/DA262 Student Workspace/.venv-DA262/Lib" "C:/Software/DA262/.venv-DA262/Lib"
+```
+- Execute the command by pressing the RETURN- or ENTER-key
 <br>![](/exercises/ex0/images/26_ex0-5_create_link.png)
 
-- Now open VS Code
+<br>
+
+- Now open **VS Code**
 <br>![](/exercises/ex0/images/26_ex0-6_open_vscode.png)
 
-- VS Code extensions
+<br>
+
+- Validate the **VS Code extensions**, select **Extensions** from the left menue bar
 <br>![](/exercises/ex0/images/26_ex0-7_vsc_extensions.png)
 
-- inst DBX
+- In the **Extensions Marketplace** search prompt, search for **SAP HANA Database Explorer**, and select **Install** on the right, if the plug-in in not yet installed
 <br>![](/exercises/ex0/images/26_ex0-8_inst_dbx.png)
 
-- open workspace
+<br>
+
+- Finally, from the **File**-menue, select **Open Workspace from File**
 <br>![](/exercises/ex0/images/26_ex0-9_open_workspace1.png)
+
+<br>
+
+- Select the file **DA262 Student Workspace.code-workspace**
 <br>![](/exercises/ex0/images/26_ex0-9_open_workspace2.png)
+
+<br>
+
+- Now your **DA262 Student Workspace** is prepared and open in VS Code
 <br>![](/exercises/ex0/images/26_ex0-9_open_workspace3.png)
 
 
 
 
 ## Step 2 - Prepare to work with the HANA database explorer
-- __Open__ the SAP HANA Database Explorer  
-- Open SAP HANA Database Explorer and create a SAP HANA database connection
+- In __VS Code__, __open__ the SAP HANA Database Explorer  
+- Open SAP HANA Database Explorer by **clicking** on the **icon** on the left menue bar, then in the **Database List** view select **+** to **Add SAP HANA Database** connection
 <br>![](/exercises/ex0/images/26_ex0s2-1_open_dbx.png)
-- select to add a local connection
+
+<br>
+
+- When prompted, select to **add a Local Connection**, which are stored locally in the VS Code storage
 <br>![](/exercises/ex0/images/26_ex0s2-1_local_conn.png)
 
--- In the next __Sign In__ step, __enter__ the __UserId__ and __password__ provided to you by the workshop instructor and __according to your desk-id__
-  - User ID: \<as provided, example __AC######U##__\>
-  - Password: \<as provided\> 
-  - Then select __Continue__.
-<br> 
+<br>
 
-Add connection
-- Host 6fe84328-0463-41c5-b0ee-90461d77272b.hna3.prod-eu10.hanacloud.ondemand.com
-- User DA262_###
-- Password welCome!26
+- In the **Add a SAP HANA Database** details windows, __enter__ the __UserId__ and __password__ provided to you by the workshop instructor and __according to your desk-id__
+  - Select Database Type as **SAP HANA Cloud**
+  - Host **6fe84328-0463-41c5-b0ee-90461d77272b.hna3.prod-eu10.hanacloud.ondemand.com**
+  - User **DA262_###** (replace ### accordingly with a 3-digit desk-id)
+  - Password **welCome!26**
+  - Select **Save Password**
+  - Select **Connect to database securly using TLS/SSL***
 
-- specify conn details and then Add Database
+- specify connection details and once finished select **Add Database** on the top right corner
 <br>![](/exercises/ex0/images/26_ex0s2-3_conn_details.png)
-- Review the connection shows up under local connections
-- Now, once the login to SAP HANA Database Explorer application was successful
--  __Now, the SAP HANA Database Explorer is ready to be used__:
-- Select Open SAP HANA SQL Console
--  Open a SQL editor
+
+<br>
+
+- The new connection will now show up under local connections
+
+-  __Now, the SAP HANA Database Explorer is ready to be used__ and can be tested, therefore:
+   - Select **Open SAP HANA SQL Console** to open a SQL editor
 <br>![](/exercises/ex0/images/26_ex0s2-4_open_SQLconsole.png)
+
+<br>
+
 - Copy and paste the following SQL example into the SQL Console
-- Execute the following SQL query
 ```sql
 /*** Test SAP HANA Cloud connection and SQL console - Check for remote sources defined in the instance ***/
 SELECT * FROM REMOTE_SOURCES;
 ```
-
-- run the statement
+- Execute the following SQL query, by selecting **Run** or pressing **F8** key
 <br>![](/exercises/ex0/images/26_ex0s2-5_runSQL.png)
 
-- review the result
+- Finally, review the result of the SQL query
 <br>![](/exercises/ex0/images/26_ex0s2-6_query_result.png)
+
+<br>
+<br>
 
 ## Step 3 - Prepare to work with the Python environment
 During this step, you will prepare the connection details for the Python to SAP HANA Cloud connection and validate the connection.
 
-<br><br>
-### To start with the exercise
+__Prepare the HANA Cloud database connection properties__  
+For our convenience, we will prepare the database connection credentials within a **user.ini-file**, which we can easily consume from the Python notebooks and avoid repeated credential prompting.
 
-Prepare the HANA Cloud database connection properties
-For our convenience, we will prepare the database connection credentials within a *.ini-file, which we can easily consume from the Python notebooks and avoid repeated crendential prompting.
-
-- Edit the user connection details, therefore open the user.ini file in VS Code
-- - Edit and enter the __user__ and the __password__ given to you by the instructor in __user.ini__-file 
-   - save the file
+- Switch back to the **project explorer** in the left menue bar on the left, 
+<br>![](/exercises/ex0/images/26_ex0s3-0.png)
+- then from project-tree **/ex0**-folder, open the **user.ini file** by **Clicking** on it, when it then opens to edit the user connection details
+- Edit the __user__ and the __password__ given to you in the __user.ini__-file 
+  -  User **DA262_###** (replace ### accordingly with a 3-digit desk-id)
+  - Password **welCome!26**
 <br>![](/exercises/ex0/images/26_ex0s3-1_userini.png)
+ - **Save** the file (menue File>save)
 
+<br>
 
-
-- open the notebook file __ex1_notebook.ipynb__ from the project explorer
+- Now, in order to validate the connection, open the notebook file __ex0 - check Python setup and SAP HANA Cloud connection.ipynb__ from the project explorer
   - from the context menu, select open
   - ![](/exercises/ex0/images/26_ex0s3-2_opencheckpythonnb.png)
 - The notbook then opens
   ![](/exercises/ex0/images/26_ex0s3-3_checkpythonnb.png)
 <br><br>
 
-- select kernel
-![](/exercises/ex0/images/26_ex0s3-4_selectkernel.png)
+- On the top right, click select **Select Kernel**
+<br>![](/exercises/ex0/images/26_ex0s3-4_selectkernel.png)
 ![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
+
+
+
+
 
 - run cells
 ![](/exercises/ex0/images/26_ex0s3-6_run_cells.png)
