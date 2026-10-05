@@ -52,12 +52,13 @@ Fanaee-T, H. (2013). Bike Sharing [Dataset](https://archive.ics.uci.edu/dataset/
 
 <br>  
 
-- Select the Python Kernel
+- On the top right, if the default kernel is already detected as ![](/exercises/ex0/images/26_ex0s3-4_defaultkernel.png), proceed with Ex 1.0
+  - Otherwise Select the Python Kernel
 <br>![](/exercises/ex1/images/26ex10-2_select_kernel.png)
 
 <br>  
 
-- Select the prepared __.venv-DA262__ Python Kernel
+  - Select the prepared __.venv-DA262__ Python Kernel
 <br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
 
 <br>  

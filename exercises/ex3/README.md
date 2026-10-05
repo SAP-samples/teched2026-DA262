@@ -46,11 +46,12 @@ Each record in the dataset is a SAP sales order with **27 fields** split into tw
 <br>![](/exercises/ex3/images/26ex30-1_open_nbk.png) 
 <br>  
 
-- Select the Python Kernel
+- On the top right, if the default kernel is already detected as ![](/exercises/ex0/images/26_ex0s3-4_defaultkernel.png), proceed with Ex 3.0
+  - Otherwise Select the Python KernelSelect the Python Kernel
 <br>![](/exercises/ex3/images/26ex30-2_select_kernel.png)
 <br>  
 
-- Select the prepared __.venv-DA262__ Python Kernel
+  - Select the prepared __.venv-DA262__ Python Kernel
 <br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
 <br>  
 

@@ -158,9 +158,13 @@ For our convenience, we will prepare the database connection credentials within 
   ![](/exercises/ex0/images/26_ex0s3-3_checkpythonnb.png)
 <br><br>
 
-- On the top right, click select **Select Kernel**
+- On the top right, if the default kernel is already detected as ![](/exercises/ex0/images/26_ex0s3-4_defaultkernel.png) 
+  - proceed with **Python Code-cells** 3 steps below
+  - otherwise **click** select **Select Kernel**
 <br>![](/exercises/ex0/images/26_ex0s3-4_selectkernel.png)
-- Select the prepared __.venv-DA262__ Python Kernel
+  - Select **Python Environments...** if this prompt shows up
+<br>![](/exercises/ex0/images/26_ex0s3-4_pythenv.png)
+  - Select the prepared __.venv-DA262__ Python Kernel
 <br>![](/exercises/ex0/images/26_ex0s3-5_selectkernel2.png)
 
 <br>
