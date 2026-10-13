@@ -63,13 +63,12 @@ In the next __Step 3__
   - finally the script evaluates the accuracy of the predictions using a custom procedure (its DDL can be found in the appendix reference section)
 - Note, as we use some random sampling, the results with not exactly match with the screenshots below
 
-__Copy__ the following SQL statement, 
+First __Copy__ the following SQL statement block to select CONTEXT and PREDICT rows, 
   - __Paste__ insert into the SQL Console
   - then __Run__ the statement block as a whole and review the result
 ```sql
-DO BEGIN
-    DECLARE PREDICTION TABLE(ID NVARCHAR(5000), COLUMN_NAME NVARCHAR(5000), PREDICTED_VALUE NVARCHAR(5000), CONFIDENCE DOUBLE);
- 
+-- selecting CONTEXT and TRANSACTIONS to PREDICT FRAUD;
+DO BEGIN 
     /*** Select a stratified random sample for ~2039 rows, of which ~39 are fraudulent flagged transaction, as context to be forwarded to SAP-RPT-1.6 with the prediction call *******/
     CONTEXT = SELECT TRANSACTION_ID, ORIGIN, CLASS, AMOUNT, OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST, FRAUD 
     		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (1.0) WHERE FRAUD = 0 AND TRANSACTION_ID < 200000  
@@ -84,6 +83,25 @@ DO BEGIN
               SELECT TRANSACTION_ID, ORIGIN, CLASS, AMOUNT, OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST 
     		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (0.2) WHERE FRAUD = 1  AND TRANSACTION_ID > 200000;
  
+    CREATE LOCAL TEMPORARY COLUMN TABLE "#CONTEXT" AS (SELECT * FROM :CONTEXT);
+    CREATE LOCAL TEMPORARY COLUMN TABLE "#PREDICT" AS (SELECT * FROM :PREDICT);
+END;
+```
+<br>
+
+Next __Copy__ the following SQL statement block to execute the AI_TABULAR_PREDICTION call, 
+  - __Paste__ insert into the SQL Console
+  - then __Run__ the statement block as a whole and review the result
+```sql
+DO BEGIN
+    DECLARE PREDICTION TABLE(ID NVARCHAR(5000), COLUMN_NAME NVARCHAR(5000), PREDICTED_VALUE NVARCHAR(5000), CONFIDENCE DOUBLE);
+ 
+    /*** Select a context random sample rows **********************/
+    CONTEXT = SELECT * FROM "#CONTEXT" ;
+    
+    /*** Select rows where to predict Fraud for *******************/
+    PREDICT = SELECT * FROM "#PREDICT";
+ 
     
     /*** Predict with SAP-RPT-1.6 using the SYS.AI_TABULAR_PREDICTION Procedure in SAP HANA CLoud ****************************************************************/
     CALL SYS.AI_TABULAR_PREDICTION (
@@ -96,9 +114,23 @@ DO BEGIN
         PREDICT_RESULTS => :PREDICTION
     );
     
+    SELECT * FROM :PREDICTION;
+    CREATE LOCAL TEMPORARY COLUMN TABLE "#PREDICTION_RESULT" AS (SELECT * FROM :PREDICTION);
+END;
+```  
+- review the predictions results from AI_TABULAR_PREDICTION using SAP-RPT-1.6
+<br>![](/exercises/ex2/images/26_ex23-predictions0.png)
+
+<br>
+
+Finally __Copy__ the following SQL statement block to evaluate the accuracy of the AI_TABULAR_PREDICTION results, 
+  - __Paste__ insert into the SQL Console
+  - then __Run__ the statement block as a whole and review the result
+```sql
+DO BEGIN
     /*** Compare actuals with predicted one-by-one in a query ******************************************************************************************************/
-    lt_PREDICT_IN = SELECT  TO_FIXEDCHAR(ID, 8) AS "ID", TO_INT(PREDICTED_VALUE)  AS CLASS, CONFIDENCE FROM :PREDICTION;
-    lt_ACTUALS_IN = SELECT  TO_FIXEDCHAR(P.TRANSACTION_ID, 8) AS "ID", TO_INT(FRAUD) AS CLASS FROM :PREDICT AS P, DA262_SHARED.TRANSACTIONS_FRAUD AS A WHERE P.TRANSACTION_ID=A.TRANSACTION_ID;
+    lt_PREDICT_IN = SELECT  TO_FIXEDCHAR(ID, 8) AS "ID", TO_INT(PREDICTED_VALUE)  AS CLASS, CONFIDENCE FROM #PREDICTION_RESULT;
+    lt_ACTUALS_IN = SELECT  TO_FIXEDCHAR(A.TRANSACTION_ID, 8) AS "ID", TO_INT(FRAUD) AS CLASS FROM #PREDICTION_RESULT AS P, DA262_SHARED.TRANSACTIONS_FRAUD AS A WHERE P.ID=A.TRANSACTION_ID;
     
     SELECT A.ID, A.CLASS AS ACTUAL_CLASS, P.CLASS AS PREDICTED_CLASS, CONFIDENCE 
            FROM :lt_PREDICT_IN AS P, :lt_ACTUALS_IN AS A WHERE A.ID=P.ID;
@@ -112,6 +144,7 @@ DO BEGIN
 END;
 ```
 
+
 - SAP-RPT-1 provides us with the predicted value in the column PREDICTED_CLASS and a CONFIDENCE value, indicating how sure RPT is about the predicted value is right.
 <br>![](/exercises/ex2/images/26_ex23-predictions.png)
 
@@ -123,6 +156,47 @@ END;
   - the F1_SCORE_1 (_1 = for our case 1 fraudulent) provides us with a balanced metric summarizing over falsely classified rows as 1 as well as overseen original fraudulent rows the model didn't predict correctly
 <br>![](/exercises/ex2/images/26_ex23-stats.png)
 
+
+<br>
+
+The OPTIONAL __Step 4__ includes a code example, when __predicting multiple targets at once__, like 
+- classification with column FRAUD
+- regression with column AMOUNT (also omitted from the PREDICT input table)
+- explore for yourself.
+
+```sql
+DO BEGIN
+    DECLARE PREDICTION TABLE(ID NVARCHAR(5000), COLUMN_NAME NVARCHAR(5000), PREDICTED_VALUE NVARCHAR(5000), CONFIDENCE DOUBLE);
+ 
+       /*** Select a stratified random sample for ~2039 rows, of which ~39 are fraudulent flagged transaction, as context to the SAP-RPT-1.6 prediction call *******/
+    CONTEXT = SELECT TRANSACTION_ID, ORIGIN, CLASS, AMOUNT, OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST, FRAUD 
+    		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (1.0) WHERE FRAUD = 0 AND TRANSACTION_ID < 200000  
+    		  UNION 
+    		  SELECT TRANSACTION_ID, ORIGIN, CLASS, AMOUNT, OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST, FRAUD 
+    		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (1.0) WHERE FRAUD = 1 AND TRANSACTION_ID < 200000 ;
+    
+    /*** Select rows where to predict Fraud, which we also prepare as a stratified sample of ~104rows, which 8 are fraudulent in the test data *******************/
+    PREDICT = SELECT TRANSACTION_ID, ORIGIN, CLASS,  OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST 
+    		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (0.03) WHERE FRAUD = 0  AND TRANSACTION_ID > 200000 
+    		  UNION 
+              SELECT TRANSACTION_ID, ORIGIN, CLASS,  OLD_BALANCE_ORIGIN, NEW_BALANCE_ORIGIN, DESTINATION, OLD_BALANCE_DEST, NEW_BALANCE_DEST 
+    		  FROM DA262_SHARED.TRANSACTIONS_FRAUD TABLESAMPLE BERNOULLI (0.2) WHERE FRAUD = 1  AND TRANSACTION_ID > 200000;
+
+ 
+    CALL SYS.AI_TABULAR_PREDICTION /*FOUNDATION_MODEL_PREDICT_DEV*/(
+        REMOTE_SOURCE_SCHEMA_NAME => NULL,
+        REMOTE_SOURCE_NAME => 'DA262_AICORE_RPT16',
+        CONTEXT_TABLE => :CONTEXT,
+        PREDICT_TABLE => :PREDICT,
+        ID_COLUMN_NAME /* INDEX_COLUMN_NAME */ => 'TRANSACTION_ID', 
+        /*PREDICT_SCHEMA => '{"FRAUD": "classification"}', */
+        CONFIGURATION => '{"target_columns": [ {"name": "FRAUD", "task_type": "classification"}, 
+                                               {"name": "AMOUNT", "task_type": "regression"}]}',
+        PREDICT_RESULTS => :PREDICTION
+    );
+    SELECT * FROM :PREDICTION;
+END
+```
 
 ## Summary
 
