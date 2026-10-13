@@ -1,3 +1,5 @@
+# Note this exercise is OPTIONAL 
+
 # Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features
 
 This exercise builds upon a previous years SAP TechEd  Hands-on Workshop [github.com/SAP-archive/teched2020-INT260](https://github.com/SAP-archive/teched2020-INT260) around a __Service Ticket Intelligence__-use case on __travel agency service tickets__ [ex2-STI](https://github.com/SAP-archive/teched2020-INT260/blob/main/exercises/ex2-STI/ex2.2/README.md), resumed here leveraging capabilities purely out of SAP HANA Cloud __AI function library (AutoML with the Predictive Analysis Library PAL)__ and __Text Embedding Models from the NLP services__ in SAP HANA Cloud.

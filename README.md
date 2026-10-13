@@ -38,8 +38,10 @@ The __Getting Started__ section should be __pursued first__, the other main exer
   - [3.2 Train a multi-target classification model for sales order form autocompletion](exercises/e3#Exercise-3.2-Train-a-"multi-target"-classification-model-for-sales-order-form-autocompletion)
   - [3.3 Predict missing fields, autocomplete new sales orders](exercises/e3#Exercise-3.3-Predict-missing-fields-to-autocomplete-new-sales-orders)
   - [3.4 Measure prediction accuracy](exercises/e3#Exercise-3.4-Measure-prediction-accuracy)
-  - [3.5 Improve prediction latency with stateful models (optional)](exercises/e3#Exercise-3.5-Improve-prediction-latency-with-stateful-models-(optional))
+  - [3.5 Improve prediction latency with stateful models (optional)](exercises/e3#Exercise-3.5-Improve-prediction-latency-with-stateful-models-(optional)) <br> <br> 
 
+
+  OPTIONAL exercise
 - [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
   - [4.1 Exploring Travel Service Ticket data using SAP HANA Dataframes](exercises/ex4#Exercise-4.1-Exploring-Travel-Service-Ticket-data-using-SAP-HANA-Dataframes) 
   - [4.2 Building a AutoML classification model for Travel Service Tickets](exercises/ex4#Exercise-4.2-Building-a-AutoML-classification-model-for-Travel-Service-Tickets) 
@@ -58,25 +60,3 @@ Support for the content in this repository is available during the actual time o
 
 ## License
 Copyright (c)2026 SAP SE or an SAP affiliate company. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/<your-project>).
-
-# Archive Containing Files
-
-1. The LICENSE file:
-In most cases, the license for SAP sample projects is `Apache 2.0`.
-
-2. The REUSE.toml file: 
-The [Reuse Tool](https://reuse.software/) must be used for your samples project. You can find the REUSE.toml in the project initial. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository.
-
-3. The README.md file (this file):
-Please edit this file as it is the primary description file for your project. You can find some placeholder titles for sections below.
-
-**OR** Link to the Tutorial Navigator for example...
-
-Start the exercises [here](https://developers.sap.com/tutorials/abap-environment-trial-onboarding.html).
-
-**IMPORTANT**
-__MUST__  
-Your repo must contain the .reuse and LICENSES folder and the License section below.  
-DO NOT REMOVE the section or folders/files.
-
- Also, remove all unused template assets(images, folders, etc) from the exercises folder. 
