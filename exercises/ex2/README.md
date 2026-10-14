@@ -203,7 +203,7 @@ END
 
 You've now successfully applied SAP-RPT-1.6 to classify fraudulent transaction based our the transaction data in SAP HANA Cloud using the new procedure AI_TABULAR_PREDICTION.
 
-Continue to - [Exercise 3 - Build multi-target neural network prediction models for an order form autocompletion use case](exercises/ex3/) 
+Continue to - [Exercise 3 - Build multi-target neural network prediction models for an order form autocompletion use case](../ex3/README.md) 
 
 <br><br>
 

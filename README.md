@@ -24,29 +24,28 @@ The __Getting Started__ section should be __pursued first__, the other main exer
 
 - [Getting Started - prepare your local VS Code environment](exercises/ex0/)
 - [Exercise 1 - Generate time series forecasts on-the-fly using using SAP-RPT-TS from SAP HANA Cloud](exercises/ex1/)
-  - [1.1 Explore the Bike Sharing time series data](exercises/ex1#Exercise-1.1-Explore-the-Bike-Sharing-time-series-data)
-  - [1.2 Forecast with "SAP-RPT-TS"](exercises/ex1#Exercise-1.2-Forecast-with-"SAP-RPT-TS")
-  - [1.3 Forecast multiple time series with "SAP-RPT-TS"](exercises/ex1#Exercise-1.3-Forecast-multiple-time-series-with-"SAP-RPT-TS")
-  - [1.4 Utilize "SAP-RPT-TS" with AutoML for time series (optional)](exercises/ex1#Exercise-1.4-Utilize-"SAP-RPT-TS"-with-AutoML-for-time-series-(optional))
-  - [1.5 Utilize PAL SQL functions for "SAP-RPT-TS" (optional)](exercises/ex1#Exercise-1.5-Utilize-PAL-SQL-functions-for-"SAP-RPT-TS"-(optional))
+  - [1.1 Explore the Bike Sharing time series data](exercises/ex1/README.md#ex-11---explore-the-bike-sharing-time-series-data)
+  - [1.2 Forecast with "SAP-RPT-TS"](exercises/ex1/README.md#ex-12---forecast-with-sap-rpt-ts)
+  - [1.3 Forecast multiple time series with "SAP-RPT-TS"](exercises/ex1/README.md#ex-13---forecast-multiple-time-series-with-sap-rpt-ts) <br> <br> 
+  
 - [Exercise 2 - Generate business data predictions using SAP-RPT-1.6 from SAP AI Core](exercises/ex2/)
-  - [2.1 Review the remote source for "SAP-RPT-1.6"](exercises/ex2#Exercise-2.1-Review-the-remote-source-for-"SAP-RPT-1.6")
-  - [2.2 Explore the GX transaction fraud data](exercises/ex2#Exercise-2.2-Explore-the-GX-transaction-fraud-data)
-  - [2.3 Generate predictions with "SAP-RPT-1.6"](exercises/ex2#Exercise-2.3-Generate-predictions-with-"SAP-RPT-1.6")
+  - [2.1 Review the remote source for "SAP-RPT-1.6"](exercises/ex2/README.md#exercise-21-review-the-remote-source-for-sap-rpt-16)
+  - [2.2 Explore the transaction fraud data](exercises/ex2/README.md#exercise-22-explore-the-transaction-fraud-data)
+  - [2.3 Generate predictions with "SAP-RPT-1.6"](exercises/ex2/README.md#exercise-23-generate-predictions-with-sap-rpt-16) <br> <br> 
+  
 - [Exercise 3 - Build multi-target neural network prediction models for an order form autocompletion use case](exercises/ex3/)  
-  - [3.1 Explore the the sales order data](exercises/e3#Exercise-3.1-Explore-the-sales-order-data)
-  - [3.2 Train a multi-target classification model for sales order form autocompletion](exercises/e3#Exercise-3.2-Train-a-"multi-target"-classification-model-for-sales-order-form-autocompletion)
-  - [3.3 Predict missing fields, autocomplete new sales orders](exercises/e3#Exercise-3.3-Predict-missing-fields-to-autocomplete-new-sales-orders)
-  - [3.4 Measure prediction accuracy](exercises/e3#Exercise-3.4-Measure-prediction-accuracy)
-  - [3.5 Improve prediction latency with stateful models (optional)](exercises/e3#Exercise-3.5-Improve-prediction-latency-with-stateful-models-(optional)) <br> <br> 
+  - [3.1 Explore the the sales order data](exercises/ex3/README.md#ex-31---access-and-explore-the-sales-order-data)
+  - [3.2 Train a multi-target classification model for sales order form autocompletion](exercises/ex3/README.md#ex-32---train-a-multi-target-classification-model-for-sales-order-form-autocompletion)
+  - [3.3 Predict missing fields, autocomplete new sales orders](exercises/ex3/README.md#ex-33---predict-missing-fields-to-autocomplete-new-sales-orders)
+  - [3.4 Measure prediction accuracy](exercises/ex3/README.md#ex-34---measure-prediction-accuracy)
+ <br> <br> 
 
 
-  OPTIONAL exercise
-- [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
-  - [4.1 Exploring Travel Service Ticket data using SAP HANA Dataframes](exercises/ex4#Exercise-4.1-Exploring-Travel-Service-Ticket-data-using-SAP-HANA-Dataframes) 
-  - [4.2 Building a AutoML classification model for Travel Service Tickets](exercises/ex4#Exercise-4.2-Building-a-AutoML-classification-model-for-Travel-Service-Tickets) 
-  - [4.3 Evaluate the AutoML model accuracy](exercises/ex4#Exercise-4.3-Evaluate-the-AutoML-model-accuracy) 
-  - [4.4 Predicting with the AutoML classification model](exercises/ex4#Exercise-4.4-Predicting-with-the-AutoML-classification-model) 
+- [OPTIONAL Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
+  - [4.1 Exploring Travel Service Ticket data using SAP HANA Dataframes](exercises/ex4/README.md#exercise-41-exploring-travel-service-ticket-data-using-sap-hana-dataframes) 
+  - [4.2 Building a AutoML classification model for Travel Service Tickets](exercises/ex4/README.md#exercise-42-building-a-automl-classification-model-for-travel-service-tickets)
+  - [4.3 Evaluate the AutoML model accuracy](exercises/ex4/README.md#exercise-43-evaluate-the-automl-model-accuracy) 
+  - [4.4 Predicting with the AutoML classification model](exercises/ex4/README.md#exercise-44-predicting-with-the-automl-classification-model)
 
 
 ## Contributing

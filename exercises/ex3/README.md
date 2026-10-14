@@ -172,7 +172,7 @@ In this exercise you used a machine learning model from the Predictive Analysis 
 
 <br><br>
 ---
-Continue to - [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](exercises/ex4/)
+Continue to - [Exercise 4 - Build a service ticket intelligence classification model using AutoML and raw text features](../ex4/README.md) 
 
 <br><br>
 
