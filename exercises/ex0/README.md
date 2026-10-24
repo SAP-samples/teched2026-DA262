@@ -31,7 +31,7 @@ The remaining  _setup and configuration tasks_ are outlined in the [Getting Star
 
 <br>
 
-- Accept the default path __C:\Users\<user>\Documents\DA262 Student Workspace__ and confirm by clicking __extract__
+- Accept the default path __C:\Users\\\<user>\Documents\DA262 Student Workspace__ and confirm by clicking __extract__
 
 <br>
 
@@ -130,6 +130,10 @@ SELECT * FROM REMOTE_SOURCES;
 
 - Finally, review the result of the SQL query
 <br>![](/exercises/ex0/images/26_ex0s2-6_query_result.png)
+
+<br>
+
+- You can safely __close__ any __Cloud Foundry Sign-In__ prompts or pop-up windows, the Cloud Foundry connectivity is not used in this Hands-On session. 
 
 <br>
 <br>

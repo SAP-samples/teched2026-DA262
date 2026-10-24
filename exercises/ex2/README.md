@@ -205,8 +205,10 @@ DO BEGIN
         PREDICT_RESULTS => :PREDICTION
     );
     SELECT * FROM :PREDICTION;
-END
+END;
 ```
+- The output will include separate rows for each target column predicted
+ <br>![](/exercises/ex2/images/26_ex24-multitarget-predict.png)
 
 ## Summary
 

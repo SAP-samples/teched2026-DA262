@@ -85,7 +85,7 @@ The following exercise descriptions, just give a high-level exercise overview, a
 
     You will work with:
     - **Training set** — 1.9 million past orders, used to train the model
-    - **Test set** — 1,000 orders the model has never seen, used to measure accuracy
+    - **Test set** — ~402.000 orders the model has never seen, used to measure accuracy
 
 <br>
 
@@ -150,7 +150,7 @@ The following exercise descriptions, just give a high-level exercise overview, a
   <br>![](/exercises/ex3/images/26ex34-1_accuracy.png)
     - **Top-1 = 90.7%** The model's first guess was correct for 907 out of 1,000 orders.
     - **Top-3 = 99.1%** The correct answer appeared somewhere in the top 3 guesses for 991 out of 1,000 orders. The model got it wrong on first guess 93 times, but the right answer was still in the top 3 for 84 of those 93 times.
-    - **MRR = 0.949** MRR measures how highly the correct answer is ranked on average:
+    - **MRR = 0.949** MRR (Mean Reciprocal Rank) is a ranking quality statistic, it measures how high up in the list of multi-class predictions the correctly predicted class value is ranked on average:
         - If the correct answer is always rank 1 → MRR = 1.000 (perfect)
         - If the correct answer is always rank 2 → MRR = 0.500
         - If the correct answer is always rank 3 → MRR = 0.333

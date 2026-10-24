@@ -14,7 +14,7 @@ SAP-RPT-TS key features include:
 - **In-Context Learning**: Accepts a series' recent history at inference time to return instant forecasts, without setup or per-series model building.
 - **Flexible Data Structures**: Handles time series of different shapes — univariate and multivariate series, multiple targets, and both past and known-future covariates — letting you incorporate related series and external drivers to improve accuracy wherever related data is available.
 - **Probabilistic and Grounded**: Produces forecasts grounded in the provided history, returning calibrated prediction intervals — not just point estimates — reducing the risk of costly over- or under-prediction decisions.
-- **Available In-Database or AI Core**: The model can flexibly be consumed directly within SAP HANA Cloud, co-located to application business data or can be consumed vis SAP AI Core.
+- **Available In-Database or AI Core**: The model can flexibly be consumed directly within SAP HANA Cloud co-located to application business data, or [SAP-RPT-TS can be consumed via SAP AI Core](https://help.sap.com/docs/sap-ai-core/generative-ai/sap-rpt-ts).
 
 <br>
 
