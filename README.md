@@ -1,4 +1,5 @@
 # DA262 -  Get hands-on with tabular AI- and forecasting-models in SAP HANA Cloud
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2026-DA262)](https://api.reuse.software/info/github.com/SAP-samples/teched2026-DA262)
 
 ## Description
 
